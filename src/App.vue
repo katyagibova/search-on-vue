@@ -1,18 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 class="on_center">Поиск и фильтрация</h1>
+    <v-row>
+      <v-spacer></v-spacer>
+      <v-col cols="2">
+        <v-btn
+        :to="`/page2`">Фильтрация</v-btn>
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
+    <router-view></router-view> 
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  data () {
+      return {
+        
+      }
+  },
+  methods:{
+    
+  },
+  computed: {
+
   }
+      
 }
 </script>
 
@@ -21,8 +39,12 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.on_center{
+  text-align: center;
+  margin-bottom: 15px;
 }
 </style>
