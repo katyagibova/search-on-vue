@@ -7,6 +7,14 @@
         <v-btn
         :to="`/page2`">Фильтрация</v-btn>
       </v-col>
+      <v-col cols="2">
+        <v-btn
+        :to="`/mainpage`">На главную</v-btn>
+      </v-col>
+      <v-col cols="2">
+        <v-btn
+        :to="`/`">Поиск</v-btn>
+        </v-col>
       <v-spacer></v-spacer>
     </v-row>
     <router-view></router-view> 

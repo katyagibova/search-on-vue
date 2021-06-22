@@ -1,15 +1,6 @@
 <template>
-        
         <v-container fluid>
             <h1 class="on_center" >Фильтр по радио-кнопке</h1>
-        <v-row>
-            <v-spacer></v-spacer>
-            <v-col cols="1">
-                <v-btn
-                :to="`/`">Back</v-btn>
-            </v-col>
-            <v-spacer></v-spacer>
-        </v-row>
         <v-row>
             <v-spacer></v-spacer>
             <v-col cols="2">
