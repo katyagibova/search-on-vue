@@ -1,7 +1,7 @@
 <template>
     <v-container fluid class="all_container">
         <v-row>
-            <v-col cols="3">
+            <v-col cols="4">
                 <v-card
                 elevation="0"
                 tile
@@ -48,25 +48,13 @@
                     <v-spacer></v-spacer>
                     <v-col cols="11">
                         <label
+                        v-for="(item, i) in SKATES.type"
+                        :key="i"
                         class="in_colomn">
                             <input                   
                             type="radio"
-                            :value="новый" 
-                            class="on_center"> новый
-                        </label>
-                        <label
-                        class="in_colomn">
-                            <input                   
-                            type="radio"
-                            :value="бу" 
-                            class="on_center"> б/у
-                        </label>
-                        <label
-                        class="in_colomn">
-                            <input                   
-                            type="radio"
-                            :value="все" 
-                            class="on_center"> новый и б/у
+                            :value="`${item}`" 
+                            class="on_center"> {{item}}
                         </label>
                     </v-col>
                     </v-row>
@@ -75,74 +63,66 @@
                     style="margin-bottom: 10px">
                         <v-spacer></v-spacer>
                         <v-col cols="11">
-                            <h3>Категория товаров</h3>
+                            <h3>Профессионализм</h3>
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col cols="11">
+                        <v-col cols="10">
                             <v-checkbox
-                            v-model="checkbox1"
-                            :label="`Checkbox 1: ${checkbox1.toString()}`"
-                            hide-details></v-checkbox>
-                            <v-checkbox
-                            v-model="checkbox2"
-                            :label="`Checkbox 2: ${checkbox2.toString()}`"
+                            v-for="(item, i) in SKATES.professionalism"
+                            :key="i"
+                            :label="`${item}`"
                             hide-details></v-checkbox>
                         </v-col>                    
                     </v-row>
-                    <v-row 
-                    style="margin-bottom: 10px">
+                    <v-row>
                         <v-spacer></v-spacer>
                         <v-col cols="11">
                             <h3 >Размерность</h3>
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col cols="11">
+                        <v-col cols="10">
                             <v-checkbox
-                            v-model="checkbox3"
-                            :label="`Детские: ${checkbox3.toString()}`"
-                            hide-details></v-checkbox>
-                            <v-checkbox
-                            v-model="checkbox4"
-                            :label="`Юношеские: ${checkbox4.toString()}`"
-                            hide-details></v-checkbox>
-                            <v-checkbox
-                            v-model="checkbox5"
-                            :label="`Взрослые: ${checkbox5.toString()}`"
+                            v-for="(item, i) in SKATES.dimension"
+                            :key="i"
+                            :label="`${item}`"
                             hide-details></v-checkbox>
                         </v-col>                    
                     </v-row>
                     <v-row>
-                    <v-spacer></v-spacer>
-                    <v-col cols="11">
-                        <h3>Бренд</h3>
-                    </v-col>
+                        <v-spacer></v-spacer>
+                        <v-col cols="11">
+                            <h3>Цвет</h3>
+                        </v-col>
                     </v-row>
                     <v-row>
-                    <v-spacer></v-spacer>
-                    <v-col cols="10">
-                        <v-text-field
-                        solo
-                        dense
-                        label="Поиск"
-                        prepend-inner-icon="mdi-magnify"
-                        ></v-text-field>
-                    </v-col>
-                    <v-spacer></v-spacer>
+                        <v-col cols="10" >
+                            <v-checkbox
+                            v-for="(item, i) in SKATES.color"
+                            :key="i"
+                            :label="`${item}`"
+                            hide-details></v-checkbox>
+                        </v-col>
                     </v-row>
                     <v-row>
-                    <v-spacer></v-spacer>
-                    <v-col cols="10" >
-                        
-                    </v-col>
-                    <v-spacer></v-spacer>
+                        <v-spacer></v-spacer>
+                        <v-col cols="11">
+                            <h3>Размеры</h3>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="10" >
+                            <v-checkbox
+                            v-for="(item, i) in SKATES.size_characteristic"
+                            :key="i"
+                            :label="`${item}`"
+                            hide-details></v-checkbox>
+                        </v-col>
                     </v-row>
                 </v-card>
             </v-col>
-            <v-col cols="9">
+            <v-col cols="8">
                 <v-row
                 style="margin-top: 15px">
                 <v-text-field
@@ -155,6 +135,8 @@
                 <v-card                
                 elevation="1"
                 tile
+                v-for="(item, i) in PRODUCTS"
+                :key="i"
                 color="rgb(240, 239, 239)"
                 style="margin-bottom: 20px"
                 >
@@ -167,45 +149,45 @@
                     ></v-list-item-avatar>
                     <v-list-item-content>
                     <div class="overline mb-3">
-                        Дата размещения: date
+                        {{item.date}}
                     </div>
                     <h2>
-                        HEADLINE
+                       {{item.name}}
                     </h2>
                     <v-row>
                         <v-col cols="3">
-                            <v-list-item-subtitle>Год выпуска: 2001</v-list-item-subtitle>
+                            <v-list-item-subtitle>Год выпуска: {{item.year_of_production}}</v-list-item-subtitle>
                         </v-col>
                         <v-col cols="3">
-                            <v-list-item-subtitle>Тип товара: новый</v-list-item-subtitle>
+                            <v-list-item-subtitle>Тип товара: {{item.type}}</v-list-item-subtitle>
                         </v-col>
                         <v-col cols="3">
-                            <v-list-item-subtitle>Категория: клюшки</v-list-item-subtitle>
+                            <v-list-item-subtitle>Категория: {{item.category}}</v-list-item-subtitle>
                         </v-col>
                         <v-spacer></v-spacer>
                     </v-row>
                     <v-row>
                         <v-col cols="3">
-                            <v-list-item-subtitle>Размерность: взрослые</v-list-item-subtitle>
+                            <v-list-item-subtitle>Размерность: {{item.dimension}}</v-list-item-subtitle>
                         </v-col>
                         <v-col cols="4">
-                            <v-list-item-subtitle>Проффесиональность: проффесиональные</v-list-item-subtitle>
+                            <v-list-item-subtitle>Проффесиональность: {{item.professionalism}}</v-list-item-subtitle>
                         </v-col>
                         <v-col cols="3">
-                            <v-list-item-subtitle>Бренд: BAUER</v-list-item-subtitle>
+                            <v-list-item-subtitle>Бренд: {{item.brand}}</v-list-item-subtitle>
                         </v-col>
                         <v-spacer></v-spacer>
                     </v-row>
                     <v-row>
                         <v-col cols="3">
-                            <v-list-item-subtitle>Рейтинг товара: 8.0</v-list-item-subtitle>
+                            <v-list-item-subtitle>Рейтинг товара: {{item.product_rating}}</v-list-item-subtitle>
                         </v-col>
                         <v-col cols="4">
-                            <v-list-item-subtitle>Рейтинг продавца: 9.0</v-list-item-subtitle>
+                            <v-list-item-subtitle>Рейтинг продавца: {{item.seller_rating}}</v-list-item-subtitle>
                         </v-col>
                         <v-spacer></v-spacer>
                     </v-row>
-                    <h3> 17000 РУБ</h3>
+                    <h3> {{item.price}} РУБ</h3>
                     </v-list-item-content>
                 </v-list-item>
                 </v-card>                
@@ -215,25 +197,35 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
     name: 'mainPage',
     components: {
     },
     data () {
       return {
-        checkbox1: true,
-        checkbox2: false,
         checkbox3: true,
         checkbox4: false,
         checkbox5: false,
       }
     },
     methods:{
-        
+        ...mapActions([
+            'GET_SKATES',
+            'GET_PRODUCTS'
+        ]),
     },
     computed: {
-
-  }
+        ...mapGetters([
+            'SKATES',
+            'PRODUCTS'
+        ]),
+    },
+    mounted(){
+      this.GET_SKATES();
+      this.GET_PRODUCTS();
+    }
 }
 </script>
 
@@ -251,6 +243,16 @@ export default {
 .in_colomn{
     display: grid;
     grid-template-columns: 20px 100px;
+}
+
+.col-11{
+    padding-top: 15px;
+    padding-bottom: 0;
+}
+
+.col-10{
+    margin-left: 15px;
+    padding-top: 10px;
 }
 
 </style>
