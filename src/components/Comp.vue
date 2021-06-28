@@ -71,7 +71,7 @@
                 :key="i">
                     <v-col
                     cols="12"
-                    v-if="radioBrand == item.brand && radioClothes == item.clothes">
+                    v-if="radioBrand == item.brand && radioClothes == item.clothes ">
                         <v-card
                         class="mx-auto"
                         max-width="344"
