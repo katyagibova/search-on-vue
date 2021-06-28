@@ -146,7 +146,7 @@
                 solo></v-text-field>
                 <v-btn>Найти</v-btn>
                 </v-row>
-                <!-- <v-row
+                <v-row
                 v-if="watchCards">
                     <v-card                
                     elevation="1"
@@ -207,7 +207,7 @@
                         </v-list-item-content>
                     </v-list-item>
                     </v-card>  
-                </v-row>               -->
+                </v-row>              
                 <v-row
                 v-for="(item, i) in PRODUCTS"
                 :key="i"
@@ -272,7 +272,8 @@
                     </v-list-item>
                     </v-card>  
                     </v-col>
-                </v-row>              
+                </v-row> 
+                <!-- что-то пишу              -->
             </v-col>
         </v-row>
     </v-container>
