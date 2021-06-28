@@ -272,7 +272,7 @@
                     </v-list-item>
                     </v-card>  
                     </v-col>
-                </v-row>               -->
+                </v-row>              ff -->
             </v-col>
         </v-row>
     </v-container>
