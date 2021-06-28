@@ -5,14 +5,20 @@
       <v-spacer></v-spacer>
       <v-col cols="2">
         <v-btn
+        color="#625AD8"
+        style="color: #fff"
         :to="`/page2`">Фильтрация</v-btn>
       </v-col>
       <v-col cols="2">
         <v-btn
+        color="#625AD8"
+        style="color: #fff"
         :to="`/mainpage`">На главную</v-btn>
       </v-col>
       <v-col cols="2">
         <v-btn
+        color="#625AD8"
+        style="color: #fff"
         :to="`/`">Поиск</v-btn>
         </v-col>
       <v-spacer></v-spacer>
@@ -22,7 +28,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
   components: {
@@ -36,7 +41,6 @@ export default {
     
   },
   computed: {
-
   }
       
 }
@@ -50,7 +54,6 @@ export default {
   color: #2c3e50;
   background-color: #b5cee7;
 }
-
 .on_center{
   text-align: center;
   margin-bottom: 15px;

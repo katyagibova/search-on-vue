@@ -6,13 +6,13 @@
                 elevation="0"
                 tile
                 style="margin: 15px">
-                    <v-row>
+                    <!-- <v-row>
                     <v-spacer></v-spacer>
                     <v-col cols="11">
                         <v-btn
                         @click="toFind">Отфильтровать</v-btn>
                     </v-col>      
-                    </v-row>      
+                    </v-row>       -->
                     <v-row>
                     <v-spacer></v-spacer>
                     <v-col cols="11">
@@ -52,18 +52,16 @@
                     </v-col>
                     </v-row>
                     <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col cols="11">
-                            <label
+                        <v-col cols="10">
+                            <v-checkbox
                             v-for="(item, i) in SKATES.type"
                             :key="i"
-                            class="in_colomn">
-                                <input  
-                                v-model="type"                 
-                                type="radio"
-                                :value="`${item}`" 
-                                class="on_center"> {{item}}
-                            </label>
+                            @click="snackbar = true"
+                            v-model="type"
+                            color="#625AD8"
+                            :value="`${item}`" 
+                            :label="`${item}`"
+                            hide-details></v-checkbox> 
                         </v-col>
                     </v-row>
                     <v-row>
@@ -85,9 +83,19 @@
                             <v-checkbox
                             v-for="(item, i) in SKATES.professionalism"
                             :key="i"
+                            @click="snackbar = true"
+                            v-model="professionalism"
+                            color="#625AD8"
+                            :value="`${item}`" 
                             :label="`${item}`"
-                            hide-details></v-checkbox>
+                            hide-details></v-checkbox>                           
                         </v-col>                    
+                    </v-row>
+                    <v-row>
+                        <v-spacer></v-spacer>
+                        <v-col cols="11">
+                            <p>{{professionalism}}</p>
+                        </v-col>
                     </v-row>
                     <v-row>
                         <v-spacer></v-spacer>
@@ -100,9 +108,19 @@
                             <v-checkbox
                             v-for="(item, i) in SKATES.dimension"
                             :key="i"
+                            @click="snackbar = true"
+                            v-model="dimension"
+                            color="#625AD8"
+                            :value="`${item}`" 
                             :label="`${item}`"
                             hide-details></v-checkbox>
                         </v-col>                    
+                    </v-row>
+                    <v-row>
+                        <v-spacer></v-spacer>
+                        <v-col cols="11">
+                            <p>{{dimension}}</p>
+                        </v-col>
                     </v-row>
                     <v-row>
                         <v-spacer></v-spacer>
@@ -115,6 +133,10 @@
                             <v-checkbox
                             v-for="(item, i) in SKATES.color"
                             :key="i"
+                            @click="snackbar = true"
+                            v-model="color"
+                            color="#625AD8"
+                            :value="`${item}`"
                             :label="`${item}`"
                             hide-details></v-checkbox>
                         </v-col>
@@ -130,6 +152,7 @@
                             <v-checkbox
                             v-for="(item, i) in SKATES.size_characteristic"
                             :key="i"
+                            color="#625AD8"
                             :label="`${item}`"
                             hide-details></v-checkbox>
                         </v-col>
@@ -144,10 +167,12 @@
                 placeholder="Поиск"
                 dense
                 solo></v-text-field>
-                <v-btn>Найти</v-btn>
+                <v-btn
+                color="#625AD8"
+                style="color: #fff">Найти</v-btn>
                 </v-row>
                 <v-row
-                v-if="selectedType == 'Новый и б/у' ">
+                v-if="allCards">
                     <v-card                
                     elevation="1"
                     tile
@@ -212,9 +237,21 @@
                 v-for="(item, i) in PRODUCTS"
                 :key="i"
                 >
-                <v-col
-                v-if="selectedType == item.type">
-                    <v-card                
+                <div
+                v-for="(type, t) in selectedType"
+                :key="t">
+                <div
+                v-for="(prof, p) in selectedProfessionalism"
+                :key="p">
+                <div
+                v-for="(dim, d) in selectedDimension"
+                :key="d">                
+                <div
+                v-for="(col, c) in selectedColor"
+                :key="c">                
+                <div
+                v-if="type == item.type &&  prof == item.professionalism && dim == item.dimension">
+                    <v-card                   
                     elevation="1"
                     tile                    
                     color="rgb(240, 239, 239)"
@@ -271,10 +308,26 @@
                         </v-list-item-content>
                     </v-list-item>
                     </v-card>  
-                    </v-col>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
                 </v-row>
             </v-col>
         </v-row>
+        <v-snackbar
+        v-model="snackbar"
+        >
+        <template >
+            <v-btn
+            color="#625AD8"
+            @click="toFind"
+            >
+            Отфильтровать
+            </v-btn>
+        </template>
+        </v-snackbar>
     </v-container>
 </template>
 
@@ -287,11 +340,16 @@ export default {
     },
     data () {
       return {
-        checkbox3: true,
-        checkbox4: false,
-        checkbox5: false,
-        type: '',
-        selectedType: 'Новый и б/у',
+        snackbar: false,
+        allCards: true,
+        type: [],
+        selectedType: [],
+        professionalism: [],
+        selectedProfessionalism: [],
+        dimension: [],
+        selectedDimension: [],
+        color: [],
+        selectedColor: [],
       }
     },
     methods:{
@@ -300,7 +358,37 @@ export default {
             'GET_PRODUCTS'
         ]),
         toFind(){
-            this.selectedType = this.type
+            if(this.type.length == 0 && this.professionalism.length == 0 && this.dimension.length == 0 && this.color.length == 0){
+                this.allCards = true
+                this.snackbar = false
+            }else{
+                this.allCards = false
+                this.snackbar = true
+            }
+            
+            if(this.type.length == 0){
+                this.selectedType = this.SKATES.type
+            } else{
+                this.selectedType = this.type
+            }
+            
+            if(this.professionalism.length == 0){
+                this.selectedProfessionalism = this.SKATES.professionalism
+            } else{
+                this.selectedProfessionalism = this.professionalism
+            }
+            
+            if(this.dimension.length == 0){
+                this.selectedDimension = this.SKATES.dimension
+            } else{
+                this.selectedDimension = this.dimension
+            }
+
+            if(this.color.length == 0){
+                this.selectedColor = this.SKATES.color
+            } else{
+                this.selectedColor = this.color
+            }
         },
     },
     computed: {
@@ -309,9 +397,24 @@ export default {
             'PRODUCTS'
         ]),
         filterType(){
-        return this.PRODUCTS.type.filter(elType => {
-            return elType.indexOf(this.type) !== -1
-        }) 
+            return this.PRODUCTS.type.filter(elType => {
+                return elType.indexOf(this.type) !== -1
+            }) 
+        },
+        filterProfessionalism(){
+            return this.PRODUCTS.professionalism.filter(elProfessionalism => {
+                return elProfessionalism.indexOf(this.professionalism) !== -1
+            }) 
+        },
+        filterDimension(){
+            return this.PRODUCTS.dimension.filter(elDimension => {
+                return elDimension.indexOf(this.dimension) !== -1
+            }) 
+        },
+        filterColor(){
+            return this.PRODUCTS.color.filter(elColor => {
+                return elColor.indexOf(this.color) !== -1
+            }) 
         },
     },
     mounted(){
@@ -346,5 +449,4 @@ export default {
     margin-left: 15px;
     padding-top: 10px;
 }
-
 </style>
