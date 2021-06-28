@@ -147,7 +147,7 @@
                 <v-btn>Найти</v-btn>
                 </v-row>
                 <v-row
-                v-if="watchCards">
+                v-if="selectedType == 'Новый и б/у' ">
                     <v-card                
                     elevation="1"
                     tile
@@ -213,13 +213,13 @@
                 :key="i"
                 >
                 <v-col
-                v-if="type == item.type">
+                v-if="selectedType == item.type">
                     <v-card                
                     elevation="1"
                     tile                    
                     color="rgb(240, 239, 239)"
                     style="margin-bottom: 20px"
-                    v-if="filteredType">
+                    >
                     <v-list-item three-line>
                         <v-list-item-avatar
                         tile
@@ -272,8 +272,7 @@
                     </v-list-item>
                     </v-card>  
                     </v-col>
-                </v-row> 
-                <!-- что-то пишу              -->
+                </v-row>
             </v-col>
         </v-row>
     </v-container>
@@ -292,8 +291,7 @@ export default {
         checkbox4: false,
         checkbox5: false,
         type: '',
-        filteredType: false,
-        watchCards: true,
+        selectedType: 'Новый и б/у',
       }
     },
     methods:{
@@ -302,8 +300,7 @@ export default {
             'GET_PRODUCTS'
         ]),
         toFind(){
-            this.filteredType = true
-            this.watchCards = false
+            this.selectedType = this.type
         },
     },
     computed: {
