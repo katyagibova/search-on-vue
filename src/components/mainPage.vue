@@ -318,16 +318,19 @@
         </v-row>
         <v-snackbar
         v-model="snackbar"
-        >
-        <template >
-            <v-btn
-            color="#625AD8"
-            @click="toFind"
-            >
-            Отфильтровать
-            </v-btn>
-        </template>
-        </v-snackbar>
+        rounded="pill">
+            <template>
+                <v-row>
+                    <v-spacer></v-spacer>
+                    <v-col cols="7">
+                        <v-btn
+                        color="#625AD8"
+                        @click="toFind">Отфильтровать</v-btn>
+                    </v-col>
+                    <v-spacer></v-spacer>
+                </v-row>                
+            </template>
+        </v-snackbar>            
     </v-container>
 </template>
 

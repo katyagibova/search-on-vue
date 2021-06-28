@@ -1,30 +1,32 @@
 <template>
-  <div id="app">
-    <h1 class="on_center">Поиск и фильтрация</h1>
-    <v-row>
-      <v-spacer></v-spacer>
-      <v-col cols="2">
-        <v-btn
-        color="#625AD8"
-        style="color: #fff"
-        :to="`/page2`">Фильтрация</v-btn>
-      </v-col>
-      <v-col cols="2">
-        <v-btn
-        color="#625AD8"
-        style="color: #fff"
-        :to="`/mainpage`">На главную</v-btn>
-      </v-col>
-      <v-col cols="2">
-        <v-btn
-        color="#625AD8"
-        style="color: #fff"
-        :to="`/`">Поиск</v-btn>
+  <v-app>
+    <div id="app">
+      <h1 class="on_center">Поиск и фильтрация</h1>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-col cols="2">
+          <v-btn
+          color="#625AD8"
+          style="color: #fff"
+          :to="`/page2`">Фильтрация</v-btn>
         </v-col>
-      <v-spacer></v-spacer>
-    </v-row>
-    <router-view></router-view> 
-  </div>
+        <v-col cols="2">
+          <v-btn
+          color="#625AD8"
+          style="color: #fff"
+          :to="`/mainpage`">На главную</v-btn>
+        </v-col>
+        <v-col cols="2">
+          <v-btn
+          color="#625AD8"
+          style="color: #fff"
+          :to="`/`">Поиск</v-btn>
+          </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
+      <router-view></router-view> 
+    </div>
+  </v-app>
 </template>
 
 <script>
