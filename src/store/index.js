@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     skates:[],
     products:[],
+    cart:[],
   },
   mutations: {
     SET_SKATES: (state, skates) => {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     SET_PRODUCTS: (state, products) => {
       state.products = products
     },
+    SET_CART: (state, product) => {
+      state.cart.push(product)
+    }
   },
   actions: {
     GET_SKATES({commit}){
@@ -45,6 +49,9 @@ export default new Vuex.Store({
         return error
       })
     },
+    ADD_TO_CART({commit}, product){
+      commit('SET_CART', product);
+    }
   },
   getters:{
     SKATES(state) {
@@ -52,6 +59,9 @@ export default new Vuex.Store({
     },
     PRODUCTS(state) {
       return state.products
+    },
+    CART(state) {
+      return state.cart
     },
   },
   modules: {
