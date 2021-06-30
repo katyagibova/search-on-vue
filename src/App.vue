@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <div id="app">
     <h1 class="on_center">Поиск и фильтрация</h1>
     <v-row>
@@ -19,7 +20,9 @@
     </v-row>
     <router-view></router-view> 
   </div>
+  </v-app>
 </template>
+
 
 <script>
 

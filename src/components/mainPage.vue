@@ -154,6 +154,7 @@
             tile
             v-for="(item, i) in PRODUCTS"
             :key="i"
+            :card = "item"
             color="rgb(240, 239, 239)"
             style="margin-bottom: 20px"
           >
@@ -233,11 +234,10 @@
                      
                 <v-btn
                 class="buttn"
-                  style="
+                style="
                     background-color: #e0e0e0;
-                    margin-left:20px;
-                  "
-                  @click="addToCart"
+                    margin-left:20px;"
+                @click="addToCart(item)"
                 >
                  Добавить в корзину
                 </v-btn>
@@ -329,6 +329,7 @@ export default {
   components: {VCarte},
   data() {
     return {
+      product_object: {}, 
       checkbox3: true,
       checkbox4: false,
       checkbox5: false,
@@ -345,19 +346,14 @@ export default {
       this.filteredType = true;
       this.watchCards = false;
     },
-    props: {
-        card: {
-            type: Object,
-            default() {
-                return {}
-            }
-        }
-    },
-    addToCart(){
-       
-        this.ADD_TO_CART(this.card)
-    }
+     addToCart(data){
+       this.ADD_TO_CART(data)
+        
+    },   
   },
+   props: {
+
+    },
   computed: {
     ...mapGetters(["SKATES",
      "PRODUCTS", 

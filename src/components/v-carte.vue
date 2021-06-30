@@ -1,10 +1,11 @@
 <template>
     <div>
         <h1>Cart</h1>
-      <v-cart-item> 
-          v-for = "item in cart_data"
+      <v-cart-item 
+          v-for = "(item, i) in cart_data"
+          :key = "i"
           :cart_item_data = "item"
-      </v-cart-item>
+      />
     </div>
 </template>
 <script>

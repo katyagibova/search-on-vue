@@ -1,5 +1,6 @@
 <template>
   <div>
+      <p>opa</p>
     <p>{{ cart_item_data.name }}</p>
     <p>{{ cart_item_data.category }}</p>
     <p>{{ cart_item_data.dimension }}</p>
