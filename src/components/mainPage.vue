@@ -154,7 +154,6 @@
             tile
             v-for="(item, i) in PRODUCTS"
             :key="i"
-            :card = "item"
             color="rgb(240, 239, 239)"
             style="margin-bottom: 20px"
           >

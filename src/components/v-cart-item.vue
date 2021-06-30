@@ -1,13 +1,17 @@
 <template>
   <div>
-      <p>opa</p>
     <p>{{ cart_item_data.name }}</p>
     <p>{{ cart_item_data.category }}</p>
     <p>{{ cart_item_data.dimension }}</p>
+    <div>
+        <p>Qty:</p>
+        {{cart_item_data.quantity}}
+        
+    </div>
     <v-btn
     class="buttn"
     style="background-color: #e0e0e0; margin-left: 20px"
-    @click="addToCart"
+    @click="deleteFromCart"
   >
     Удалить
   </v-btn>
@@ -25,9 +29,18 @@ export default {
       },
     },
   },
+  methods: {
+      deleteFromCart(){
+          this.$emit('deleteFromCart')
+      }
+  },
   data() {
     return {};
   },
+  mounted() {
+    this.$set(this.cart_item_data, 'quantity', 1)
+  },
+  
   computed: {},
   
 };
