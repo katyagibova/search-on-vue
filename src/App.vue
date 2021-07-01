@@ -18,7 +18,10 @@
         </v-col>
       <v-spacer></v-spacer>
     </v-row>
-    <router-view></router-view> 
+   
+       <router-view></router-view> 
+  
+ 
   </div>
   </v-app>
 </template>

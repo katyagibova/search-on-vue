@@ -19,21 +19,19 @@ export default new Vuex.Store({
       state.products = products
     },
     SET_CART: (state, product) => {
-      if(state.cart.length){
-        let isProductExists = false;
-        state.cart.map(function (item){
-          if (item.key === product.key) {
-            isProductExists = true;
-            item.quantity++
-          }
-        })
-        if (!isProductExists){
-          state.cart.push(product)
-        } 
-      }else{
-        state.cart.push(product)
-      }
-    },
+      let isProductExist = false
+      state.cart.map(function (item) {
+        if (item.key === product.key) {
+          isProductExist = true
+          item.quantity++
+        }
+      })
+      isProductExist || state.cart.push({ ...product, quantity: 1 })
+       /*
+        * в данной строке мы сразу ставим quantity:1 для любого нового товара в корзине,
+        * компоненты получают его сразу в пропсах
+        */
+  },
     REMOVE_FROM_CART: (state, index) => {
       state.cart.splice(index, 1)
     },

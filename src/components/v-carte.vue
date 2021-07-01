@@ -1,6 +1,16 @@
 <template>
     <div>
-        <h1>Cart</h1>
+  
+        <router-link :to="{name: 'mainPage'}" >
+          <div
+          style="
+          background: #676f73a6;
+          border: solid 1px #4f4a4a;
+           margin-left: 20px;margin-bottom: 30px;
+           margin-right: 85%
+           "
+          >Вернуться в каталог</div>
+       </router-link>
       <v-cart-item 
           v-for = "(item, i) in cart_data"
           :key = "i"

@@ -38,7 +38,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$set(this.cart_item_data, 'quantity', 1)
+    // this.$set(this.cart_item_data, 'quantity', 1)
   },
   
   computed: {},

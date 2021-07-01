@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Page2 from '../components/Comp.vue'
 import mainPage from '../components/mainPage.vue'
-
+import vCarte from '../components/v-carte.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +21,12 @@ const routes = [
     path: '/mainpage',
     name: 'mainPage',
     component: mainPage
+  },
+  {
+    path: '/cart',
+    name: 'carte',
+    component: vCarte,
+    props: true
   },
 ]
 

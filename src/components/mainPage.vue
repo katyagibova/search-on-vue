@@ -1,5 +1,9 @@
 <template>
   <v-container fluid class="all_container">
+      <!-- <keep-alive>
+      <router-view></router-view>
+      </keep-alive> -->
+      
     <v-row>
       <v-col cols="4">
         <v-card elevation="0" tile style="margin: 15px">
@@ -7,12 +11,6 @@
             <v-spacer></v-spacer>
             <v-col cols="11">
               <v-btn @click="toFind">Отфильтровать</v-btn>
-
-              <v-carte 
-              v-if="CART.length" 
-              :cart_data="CART"
-              />
-
             </v-col>
           </v-row>
           <v-row>
@@ -147,6 +145,18 @@
             solo
           ></v-text-field>
           <v-btn>Найти</v-btn>
+
+          <router-link :to="{name: 'carte', params: {cart_data: CART}}">
+          <div
+          style="
+          background: #676f73a6;
+          border: solid 1px #4f4a4a;
+           margin-left: 20px;margin-bottom: 30px
+           "
+          >Корзина: {{CART.length}}
+          </div>
+          </router-link>
+
         </v-row>
         <v-row v-if="watchCards">
           <v-card
@@ -321,11 +331,10 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import VCarte from './v-carte.vue';
 
 export default {
   name: "mainPage",
-  components: {VCarte},
+  components: {},
   data() {
     return {
       product_object: {}, 
@@ -354,9 +363,7 @@ export default {
 
     },
   computed: {
-    ...mapGetters(["SKATES",
-     "PRODUCTS", 
-     "CART"]),
+    ...mapGetters(["SKATES","PRODUCTS", "CART"]),
     filterType() {
       return this.PRODUCTS.type.filter((elType) => {
         return elType.indexOf(this.type) !== -1;
