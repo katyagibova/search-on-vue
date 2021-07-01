@@ -27,14 +27,19 @@ export default new Vuex.Store({
         }
       })
       isProductExist || state.cart.push({ ...product, quantity: 1 })
-       /*
-        * в данной строке мы сразу ставим quantity:1 для любого нового товара в корзине,
-        * компоненты получают его сразу в пропсах
-        */
-  },
+    },
     REMOVE_FROM_CART: (state, index) => {
       state.cart.splice(index, 1)
     },
+    INCREMENT: (state, index) => {
+      state.cart[index].quantity++
+    },
+    DECREMENT: (state, index) => {
+      if(state.cart[index].quantity > 1){
+        state.cart[index].quantity--
+      }
+    }
+    
   },
   actions: {
     GET_SKATES({commit}){
@@ -68,7 +73,13 @@ export default new Vuex.Store({
     },
     DELETE_FROM_CART({commit}, index) {
       commit('REMOVE_FROM_CART', index)
-    }
+    },
+    INCREMENT_CART_ITEM({commit}, index) {
+      commit('INCREMENT', index)
+    },
+    DECREMENT_CART_ITEM({commit}, index) {
+      commit('DECREMENT', index)
+    },
   },
   getters:{
     SKATES(state) {

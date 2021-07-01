@@ -16,6 +16,8 @@
           :key = "i"
           :cart_item_data = "item"
           @deleteFromCart = "deleteFromCart(i)"
+          @increment = "increment(i)"
+          @decrement = "decrement(i)"    
       />
     </div>
 </template>
@@ -35,10 +37,18 @@ export default {
   },
   methods: {
       ...mapActions([
-          'DELETE_FROM_CART'
+          'DELETE_FROM_CART',
+          'INCREMENT_CART_ITEM',
+          'DECREMENT_CART_ITEM'
       ]),
       deleteFromCart(index){
         this.DELETE_FROM_CART(index)
+      },
+      increment(i) {
+          this.INCREMENT_CART_ITEM(i)
+      },
+      decrement(i) {
+          this.DECREMENT_CART_ITEM(i)
       }
   },
   data () {

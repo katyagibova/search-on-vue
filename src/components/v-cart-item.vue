@@ -1,11 +1,21 @@
 <template>
-  <div>
+  <div
+   style="margin-left: 50px"
+   >
     <p>{{ cart_item_data.name }}</p>
     <p>{{ cart_item_data.category }}</p>
     <p>{{ cart_item_data.dimension }}</p>
     <div>
-        <p>Qty:</p>
-        {{cart_item_data.quantity}}
+
+        <p>Кол-во:</p>
+        <span>
+            <span style="cursor: pointer;" 
+            @click="decrementItem">-</span>
+            {{cart_item_data.quantity}}
+            <span style="cursor: pointer;"
+            @click="incrementItem">+</span>
+        </span>
+        
         
     </div>
     <v-btn
@@ -19,6 +29,7 @@
 </template>
 
 <script>
+
 export default {
   name: "v-cart-item",
   props: {
@@ -30,15 +41,21 @@ export default {
     },
   },
   methods: {
+
       deleteFromCart(){
           this.$emit('deleteFromCart')
-      }
+      },
+      decrementItem() {
+          this.$emit('decrement')
+      },
+      incrementItem() {
+          this.$emit('increment')
+      },
   },
   data() {
     return {};
   },
   mounted() {
-    // this.$set(this.cart_item_data, 'quantity', 1)
   },
   
   computed: {},
