@@ -156,6 +156,17 @@
           >Корзина: {{CART.length}}
           </div>
           </router-link>
+          
+          <router-link :to="{name: 'favorite'}">
+          <div
+          style="
+          background: #676f73a6;
+          border: solid 1px #4f4a4a;
+           margin-left: 20px;margin-bottom: 30px
+           "
+          >Избранное: {{FAVORITE.length}}
+          </div>
+          </router-link>
 
         </v-row>
         <v-row v-if="watchCards">
@@ -234,13 +245,14 @@
                   </v-col>
                   <v-spacer></v-spacer>
                 </v-row>
-               
-
-               <div>
+                
                      <h3
                      style=" float: left;"
                      >{{ item.price }} РУБ</h3>
-                     
+                <div
+               
+                >
+
                 <v-btn
                 class="buttn"
                 style="
@@ -250,9 +262,20 @@
                 >
                  Добавить в корзину
                 </v-btn>
+
                 </div>
-                
-               
+
+                <div>
+                <v-btn
+                class="buttn"
+                style="
+                    background-color: #e0e0e0;
+                    margin-left:20px;"
+                @click="addToFavorite(item)"
+                >
+                 Добавить в избранное
+                </v-btn>
+               </div>
               </v-list-item-content>
             </v-list-item>
           </v-card>
@@ -349,21 +372,27 @@ export default {
   methods: {
     ...mapActions(["GET_SKATES",
      "GET_PRODUCTS",
-     "ADD_TO_CART"]),
+     "ADD_TO_CART",
+     "ADD_TO_FAVORITE"
+     ]),
     toFind() {
       this.filteredType = true;
       this.watchCards = false;
     },
-     addToCart(data){
+    addToCart(data){
        this.ADD_TO_CART(data)
         
-    },   
+    }, 
+    addToFavorite(data){
+       this.ADD_TO_FAVORITE(data)
+        
+    },
   },
    props: {
 
     },
   computed: {
-    ...mapGetters(["SKATES","PRODUCTS", "CART"]),
+    ...mapGetters(["SKATES","PRODUCTS", "CART","FAVORITE"]),
     filterType() {
       return this.PRODUCTS.type.filter((elType) => {
         return elType.indexOf(this.type) !== -1;

@@ -1,6 +1,6 @@
 <template>
     <div>
-  
+      
         <router-link :to="{name: 'mainPage'}" >
           <div
           style="
@@ -11,26 +11,25 @@
            "
           >Вернуться в каталог</div>
        </router-link>
-      <v-cart-item 
-          v-for = "(item, i) in cart_data"
+
+      <favorite-item
+          v-for = "(item, i) in favorite_data"
           :key = "i"
-          :cart_item_data = "item"
-          @deleteFromCart = "deleteFromCart(i)"
-          @increment = "increment(i)"
-          @decrement = "decrement(i)"    
+          :favorite_item_data = "item"
+          @deleteFromFavorite = "deleteFromFavorite(i)"   
       />
     </div>
 </template>
 <script> 
 
-import vCartItem from './v-cart-item.vue'
+import favoriteItem from './favorite-item.vue'
 import {mapActions} from 'vuex'
 
 export default {
-  components: { vCartItem },
-  name: "v-carte",
+  components: { favoriteItem },
+  name: "favorites",
   props: {
-      cart_data: {
+      favorite_data: {
           type: Array,
           default() {
               return []
@@ -39,18 +38,10 @@ export default {
   },
   methods: {
       ...mapActions([
-          'DELETE_FROM_CART',
-          'INCREMENT_CART_ITEM',
-          'DECREMENT_CART_ITEM'
+          'DELETE_FROM_FAVORITE'
       ]),
-      deleteFromCart(index){
-        this.DELETE_FROM_CART(index)
-      },
-      increment(i) {
-          this.INCREMENT_CART_ITEM(i)
-      },
-      decrement(i) {
-          this.DECREMENT_CART_ITEM(i)
+      deleteFromFavorite(index){
+        this.DELETE_FROM_FAVORITE(index)
       }
   },
   data () {

@@ -10,6 +10,7 @@ export default new Vuex.Store({
     skates:[],
     products:[],
     cart:[],
+    favorite:[],
   },
   mutations: {
     SET_SKATES: (state, skates) => {
@@ -30,6 +31,25 @@ export default new Vuex.Store({
     },
     REMOVE_FROM_CART: (state, index) => {
       state.cart.splice(index, 1)
+    },
+    SET_FAVORITE: (state, product) => {
+      let isProductExists = false;
+      if (state.favorite.length) {
+        state.favorite.map(function (item) {
+          if (item.key === product.key) {
+            isProductExists = true;
+            item.quantity++
+          }
+        })
+        if (!isProductExists) {
+          state.favorite.push(product)
+        }
+      } else {
+        state.favorite.push(product)
+      }
+    },
+    REMOVE_FROM_FAVORITE: (state, index) => {
+      state.favorite.splice(index, 1)
     },
     INCREMENT: (state, index) => {
       state.cart[index].quantity++
@@ -74,6 +94,12 @@ export default new Vuex.Store({
     DELETE_FROM_CART({commit}, index) {
       commit('REMOVE_FROM_CART', index)
     },
+    ADD_TO_FAVORITE({commit}, product){
+      commit('SET_FAVORITE', product);
+    },
+    DELETE_FROM_FAVORITE({commit}, index) {
+      commit('REMOVE_FAVORITE', index)
+    },
     INCREMENT_CART_ITEM({commit}, index) {
       commit('INCREMENT', index)
     },
@@ -90,6 +116,9 @@ export default new Vuex.Store({
     },
     CART(state) {
       return state.cart
+    },
+    FAVORITE(state) {
+      return state.favorite
     },
   },
   modules: {
