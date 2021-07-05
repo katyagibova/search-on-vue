@@ -157,7 +157,10 @@
           </div>
           </router-link>
           
-          <router-link :to="{name: 'favorite'}">
+          <router-link :to="{name: 'favorites', params: {favorites_data: FAVORITE}}">
+          <!-- <favorites
+          :favorite_data="FAVORITE"
+          /> -->
           <div
           style="
           background: #676f73a6;

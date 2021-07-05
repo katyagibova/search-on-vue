@@ -6,9 +6,6 @@
     <p>{{ favorite_item_data.name }}</p>
     <p>{{ favorite_item_data.category }}</p>
     <p>{{ favorite_item_data.dimension }}</p>
-    <div>
-
-    </div>
     <v-btn
     class="buttn"
     style="background-color: #e0e0e0; margin-left: 20px"

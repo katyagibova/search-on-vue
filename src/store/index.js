@@ -48,7 +48,7 @@ export default new Vuex.Store({
         state.favorite.push(product)
       }
     },
-    REMOVE_FROM_FAVORITE: (state, index) => {
+    REMOVE_FAVORITE: (state, index) => {
       state.favorite.splice(index, 1)
     },
     INCREMENT: (state, index) => {

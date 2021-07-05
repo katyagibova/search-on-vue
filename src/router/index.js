@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import Page2 from '../components/Comp.vue'
 import mainPage from '../components/mainPage.vue'
 import vCarte from '../components/v-carte.vue'
-import favorite from '../components/favorites.vue'
+import favorites from '../components/favorites.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,8 +31,9 @@ const routes = [
   },
   {
     path: '/favorite',
-    name: 'favorite',
-    component: favorite,
+    name: 'favorites',
+    component: favorites,
+    props: true
   },
 ]
 

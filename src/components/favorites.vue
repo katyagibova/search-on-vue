@@ -13,7 +13,7 @@
        </router-link>
 
       <favorite-item
-          v-for = "(item, i) in favorite_data"
+          v-for = "(item, i) in favorites_data"
           :key = "i"
           :favorite_item_data = "item"
           @deleteFromFavorite = "deleteFromFavorite(i)"   
@@ -29,7 +29,7 @@ export default {
   components: { favoriteItem },
   name: "favorites",
   props: {
-      favorite_data: {
+      favorites_data: {
           type: Array,
           default() {
               return []
