@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     skates:[],
     products:[],
+    all_filters:[]
   },
   mutations: {
     SET_SKATES: (state, skates) => {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS: (state, products) => {
       state.products = products
+    },
+    SET_FILTERS: (state, all_filters) => {
+      state.all_filters = all_filters
     },
   },
   actions: {
@@ -45,6 +49,19 @@ export default new Vuex.Store({
         return error
       })
     },
+    GET_FILTERS({commit}){
+      return Axios('http://localhost:3000/all_filters',{
+        method: "GET"
+      })
+      .then((all_filters) => {
+        commit('SET_FILTERS', all_filters.data)
+        return all_filters
+      })
+      .catch((error) => {
+        console.log(error)
+        return error
+      })
+    },
   },
   getters:{
     SKATES(state) {
@@ -52,6 +69,9 @@ export default new Vuex.Store({
     },
     PRODUCTS(state) {
       return state.products
+    },
+    FILTERS(state) {
+      return state.all_filters
     },
   },
   modules: {

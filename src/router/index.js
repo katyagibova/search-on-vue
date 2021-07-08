@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Page2 from '../components/Comp.vue'
 import mainPage from '../components/mainPage.vue'
+import filterspage from '../components/FiltersPage.vue'
 
 Vue.use(VueRouter)
 
@@ -20,7 +21,13 @@ const routes = [
   {
     path: '/mainpage',
     name: 'mainPage',
-    component: mainPage
+    component: mainPage,
+    props: true
+  },
+  {
+    path: '/filterspage',
+    name: 'filterspage',
+    component: filterspage
   },
 ]
 

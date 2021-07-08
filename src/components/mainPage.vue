@@ -6,13 +6,6 @@
                 elevation="0"
                 tile
                 style="margin: 15px">
-                    <!-- <v-row>
-                    <v-spacer></v-spacer>
-                    <v-col cols="11">
-                        <v-btn
-                        @click="toFind">Отфильтровать</v-btn>
-                    </v-col>      
-                    </v-row>       -->
                     <v-row>
                     <v-spacer></v-spacer>
                     <v-col cols="11">
@@ -171,68 +164,76 @@
                 color="#625AD8"
                 style="color: #fff">Найти</v-btn>
                 </v-row>
-                <v-row
-                v-if="allCards">
-                    <v-card                
-                    elevation="1"
-                    tile
-                    v-for="(item, i) in PRODUCTS"
-                    :key="i"
-                    color="rgb(240, 239, 239)"
-                    style="margin-bottom: 20px"
-                    >
-                    <v-list-item three-line>
-                        <v-list-item-avatar
-                        tile
-                        size="120"
-                        color="#fff"
-                        style="margin-right: 15px"
-                        ></v-list-item-avatar>
-                        <v-list-item-content>
-                        <div class="overline mb-3">
-                            {{item.date}}
+                    <v-row
+                    v-if="allCards && noCategory == false">
+                        <div
+                        v-for="(item, i) in PRODUCTS"
+                        :key="i">
+                            <div
+                            v-if="category == item.category">
+                                <v-card                
+                                elevation="1"
+                                tile                    
+                                color="rgb(240, 239, 239)"
+                                style="margin-bottom: 20px"
+                                >
+                                <v-list-item three-line>
+                                    <v-list-item-avatar
+                                    tile
+                                    size="120"
+                                    color="#fff"
+                                    style="margin-right: 15px"
+                                    ></v-list-item-avatar>
+                                    <v-list-item-content>
+                                    <div class="overline mb-3">
+                                        {{item.date}}
+                                    </div>
+                                    <h2>
+                                    {{item.name}}
+                                    </h2>
+                                    <v-row>
+                                        <v-col cols="3">
+                                            <v-list-item-subtitle>Год выпуска: {{item.year_of_production}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <v-list-item-subtitle>Тип товара: {{item.type}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <v-list-item-subtitle>Категория: {{item.category}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-spacer></v-spacer>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col cols="3">
+                                            <v-list-item-subtitle>Размерность: {{item.dimension}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-col cols="4">
+                                            <v-list-item-subtitle>Проффесиональность: {{item.professionalism}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <v-list-item-subtitle>Бренд: {{item.brand}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-spacer></v-spacer>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col cols="3">
+                                            <v-list-item-subtitle>Рейтинг товара: {{item.product_rating}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-col cols="4">
+                                            <v-list-item-subtitle>Рейтинг продавца: {{item.seller_rating}}</v-list-item-subtitle>
+                                        </v-col>
+                                        <v-spacer></v-spacer>
+                                    </v-row>
+                                    <h3> {{item.price}} РУБ</h3>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                </v-card> 
+                            </div>
                         </div>
-                        <h2>
-                        {{item.name}}
-                        </h2>
-                        <v-row>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Год выпуска: {{item.year_of_production}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Тип товара: {{item.type}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Категория: {{item.category}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-spacer></v-spacer>
-                        </v-row>
-                        <v-row>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Размерность: {{item.dimension}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="4">
-                                <v-list-item-subtitle>Проффесиональность: {{item.professionalism}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Бренд: {{item.brand}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-spacer></v-spacer>
-                        </v-row>
-                        <v-row>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Рейтинг товара: {{item.product_rating}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="4">
-                                <v-list-item-subtitle>Рейтинг продавца: {{item.seller_rating}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-spacer></v-spacer>
-                        </v-row>
-                        <h3> {{item.price}} РУБ</h3>
-                        </v-list-item-content>
-                    </v-list-item>
-                    </v-card>  
-                </v-row>              
+                    </v-row>
+                <div v-if="noCategory">
+                    <h2>К сожалению товаров из этой категории нет</h2>
+                </div>
                 <v-row
                 v-for="(item, i) in PRODUCTS"
                 :key="i"
@@ -246,11 +247,11 @@
                 <div
                 v-for="(dim, d) in selectedDimension"
                 :key="d">                
-                <div
+                <!-- <div
                 v-for="(col, c) in selectedColor"
-                :key="c">                
+                :key="c"> -->
                 <div
-                v-if="type == item.type &&  prof == item.professionalism && dim == item.dimension">
+                v-if=" category == item.category && type == item.type &&  prof == item.professionalism && dim == item.dimension"> 
                     <v-card                   
                     elevation="1"
                     tile                    
@@ -312,7 +313,7 @@
                     </div>
                     </div>
                     </div>
-                    </div>
+                    <!-- </div>  -->
                 </v-row>
             </v-col>
         </v-row>
@@ -341,8 +342,18 @@ export default {
     name: 'mainPage',
     components: {
     },
+    props: {
+        category: {
+            type: String,
+            default() {
+                return "";
+            },
+        },
+    },
     data () {
       return {
+        counter: 0,
+        noCategory: false,
         snackbar: false,
         allCards: true,
         type: [],
@@ -353,6 +364,7 @@ export default {
         selectedDimension: [],
         color: [],
         selectedColor: [],
+
       }
     },
     methods:{
@@ -393,6 +405,18 @@ export default {
                 this.selectedColor = this.color
             }
         },
+        counterCategories(){
+            for( let i = 0;  i< 15; i++){
+                if(this.PRODUCTS[i].category != this.category){
+                    this.counter++
+                }
+            }
+            console.log(this.counter)
+            if(this.counter == 15){
+                this.noCategory = true;
+            }
+
+        }
     },
     computed: {
         ...mapGetters([
@@ -419,11 +443,13 @@ export default {
                 return elColor.indexOf(this.color) !== -1
             }) 
         },
+        
     },
     mounted(){
       this.GET_SKATES();
       this.GET_PRODUCTS();
-    }
+      this.counterCategories();
+    },
 }
 </script>
 

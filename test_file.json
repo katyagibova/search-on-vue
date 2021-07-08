@@ -1,0 +1,102 @@
+{
+  "all_filters": [
+    {
+      "str_name": "skates",
+      "id": "60cf5a8aeb7caba440ccb940",
+      "filter_name": "Коньки",
+      "next_filters": [
+        {
+          "str_name": "dimension",
+          "filter_name": "Размерность",
+          "id": "60cf5a8aeb7caba440ccb947",
+          "end_filters": [
+            "Детские",
+            "Юношеские",
+            "Взрослые"
+          ]
+        },
+        {
+          "str_name": "professionalism",
+          "filter_name": "Профессионализм",
+          "id": "60cf5a8aeb7caba440ccb948",
+          "end_filters": [
+            "Любительские",
+            "Полупрофессиональне",
+            "Профессиональные"
+          ]
+        },
+        {
+          "str_name": "color",
+          "filter_name": "Цвет",
+          "id": "60cf5a8aeb7caba440ccb949",
+          "end_filters": [
+            "Белый",
+            "Черный",
+            "Красный",
+            "Синий",
+            "Зеленый",
+            "Оранжевый",
+            "Розовый",
+            "Желтый",
+            "Фиолетовый",
+            "Голубой"
+          ]
+        }
+      ]
+    },
+    {
+      "str_name": "putters",
+      "id": "60cf5a8aeb7caba440ccb946",
+      "filter_name": "Клюшки",
+      "next_filters": [
+        {
+          "str_name": "dimension",
+          "filter_name": "Размерность",
+          "_id": "60cf5a8aeb7caba440ccb946",
+          "end_filters": [
+            "Детские",
+            "Юношеские",
+            "Взрослые"
+          ]
+        },
+        {
+          "str_name": "professionalism",
+          "filter_name": "Профессионализм",
+          "_id": "60cf5a8aeb7caba440ccb946",
+          "end_filters": [
+            "Любительские",
+            "Полупрофессиональне",
+            "Профессиональные"
+          ]
+        },
+        {
+          "str_name": "color",
+          "filter_name": "Цвет",
+          "_id": "60cf5a8aeb7caba440ccb946",
+          "end_filters": [
+            "Белый",
+            "Черный",
+            "Красный",
+            "Синий",
+            "Зеленый",
+            "Оранжевый",
+            "Розовый",
+            "Желтый",
+            "Фиолетовый",
+            "Голубой"
+          ]
+        },
+        {
+          "str_name": "praise_stick",
+          "filter_name": "Хват клюшки",
+          "_id": "60cf5a8aeb7caba440ccb946",
+          "end_filters": [
+            "Левый",
+            "Правый",
+            "Прямой"
+          ]
+        }
+      ]
+    }
+  ]
+}
