@@ -164,6 +164,13 @@
                 color="#625AD8"
                 style="color: #fff">Найти</v-btn>
                 </v-row>
+                <div
+                v-if="category.trim() == ''">
+                    <h2>Так как вы обновили страницу, то настройки сбросились.</h2>
+                    <h2>Пожалуйста выберите категорию во вкладке "Категории"</h2>
+                </div>
+                <div
+                v-else>
                     <v-row
                     v-if="allCards && noCategory == false">
                         <div
@@ -231,6 +238,7 @@
                             </div>
                         </div>
                     </v-row>
+                </div>
                 <div v-if="noCategory">
                     <h2>К сожалению товаров из этой категории нет</h2>
                 </div>
@@ -406,14 +414,18 @@ export default {
             }
         },
         counterCategories(){
-            for( let i = 0;  i< 15; i++){
-                if(this.PRODUCTS[i].category != this.category){
-                    this.counter++
+            if(this.category.trim() == ''){
+                this.noCategory = false
+            } else{
+                for( let i = 0;  i< 15; i++){
+                    if(this.PRODUCTS[i].category != this.category){
+                        this.counter++
+                    }
                 }
-            }
-            console.log(this.counter)
-            if(this.counter == 15){
-                this.noCategory = true;
+                console.log(this.counter)
+                if(this.counter == 15){
+                    this.noCategory = true;
+                }
             }
 
         }

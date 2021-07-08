@@ -26,7 +26,7 @@
           <v-btn
           color="#625AD8"
           style="color: #fff"
-          :to="`/filterspage`">Фильтр по плиткам</v-btn>
+          :to="`/filterspage`">Категории</v-btn>
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
