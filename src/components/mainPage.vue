@@ -164,6 +164,30 @@
                 color="#625AD8"
                 style="color: #fff">Найти</v-btn>
                 </v-row>
+                <v-row>
+                    <v-col cols="4">
+                        <v-select
+                        v-model="dateSelect"
+                        :items="dateItems"
+                        label="По дате"
+                        color="#625AD8"
+                        ></v-select>
+                    </v-col>
+                    <v-col cols="4">
+                        <v-select
+                        v-model="priceSelect"
+                        color="#625AD8"
+                        :items="priceItems"
+                        label="По стоимости"
+                        @change="sortedByPrice"
+                        ></v-select>
+                    </v-col>
+                    <v-col cols="4">
+                        <v-checkbox
+                        :label="`С начала с лучшей оценкой`"
+                        ></v-checkbox>
+                    </v-col>
+                </v-row>
                 <div
                 v-if="category.trim() == ''">
                     <h2>Так как вы обновили страницу, то настройки сбросились.</h2>
@@ -362,6 +386,8 @@ export default {
       return {
         counter: 0,
         noCategory: false,
+        dateSelect: "",
+        priceSelect: "",
         snackbar: false,
         allCards: true,
         type: [],
@@ -372,7 +398,8 @@ export default {
         selectedDimension: [],
         color: [],
         selectedColor: [],
-
+        dateItems: ["По умолчанию", "По возрастанию", "По убыванию"],
+        priceItems: ["По умолчанию", "По возрастанию", "По убыванию"]
       }
     },
     methods:{
@@ -422,12 +449,15 @@ export default {
                         this.counter++
                     }
                 }
-                console.log(this.counter)
                 if(this.counter == 15){
                     this.noCategory = true;
                 }
             }
-
+        },
+        sortedByPrice(){
+            if(this.priceSelect == "По возрастанию"){
+                this.PRODUCTS.sort( (a,b) => a.price - b.price )
+            }  
         }
     },
     computed: {
