@@ -170,13 +170,20 @@
           >Избранное: {{FAVORITE.length}}
           </div>
           </router-link>
-
+          <v-select 
+              :items="items" 
+              v-model="selectedItems" 
+              label="Выберите кол-во карточек">
+          </v-select> 
         </v-row>
         <v-row v-if="watchCards">
+          <!-- v-for="(item, i) in PRODUCTS" -->
           <v-card
             elevation="1"
             tile
-            v-for="(item, i) in PRODUCTS"
+             v-for="(item,i) in PRODUCTS.slice(0,
+             selectedItems.bar
+             )"
             :key="i"
             color="rgb(240, 239, 239)"
             style="margin-bottom: 20px"
@@ -363,6 +370,17 @@ export default {
   components: {},
   data() {
     return {
+    //   defaultSelected: {
+    //   text: '2 карточки',
+    //   value: {bar: 2 }
+    // },
+      items: [
+      { text: '2 карточки', value: {bar: 2 } },
+      { text: '3 карточки', value: {bar: 3 } },
+      { text: '4 карточки', value: {bar: 4 } }
+    ],
+      selectedItems: {bar: 2 },
+
       product_object: {}, 
       checkbox3: true,
       checkbox4: false,
