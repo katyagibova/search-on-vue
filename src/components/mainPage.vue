@@ -171,20 +171,24 @@
                         :items="dateItems"
                         label="По дате"
                         color="#625AD8"
+                        @change="sortedByDate"
                         ></v-select>
                     </v-col>
                     <v-col cols="4">
                         <v-select
                         v-model="priceSelect"
-                        color="#625AD8"
                         :items="priceItems"
                         label="По стоимости"
+                        color="#625AD8"
                         @change="sortedByPrice"
                         ></v-select>
                     </v-col>
                     <v-col cols="4">
                         <v-checkbox
+                        v-model="rating_checkbox"
+                        color="#625AD8"
                         :label="`С начала с лучшей оценкой`"
+                        @click="sortedByEstimation"
                         ></v-checkbox>
                     </v-col>
                 </v-row>
@@ -302,7 +306,7 @@
                             {{item.date}}
                         </div>
                         <h2>
-                        {{item.name}}
+                            {{item.name}}
                         </h2>
                         <v-row>
                             <v-col cols="3">
@@ -388,6 +392,7 @@ export default {
         noCategory: false,
         dateSelect: "",
         priceSelect: "",
+        rating_checkbox: false,
         snackbar: false,
         allCards: true,
         type: [],
@@ -454,11 +459,31 @@ export default {
                 }
             }
         },
+        sortedByDate(){
+            if(this.dateSelect == "По возрастанию"){
+                this.PRODUCTS.sort((a, b) => new Date(a.date) - new Date(b.date))
+            } else if(this.dateSelect == "По убыванию"){
+                this.PRODUCTS.sort( (a,b) => new Date(b.date) - new Date(a.date))
+            } else{
+                this.PRODUCTS.sort( (a,b) => a.name.localeCompare(b.name))
+            }
+        },
         sortedByPrice(){
             if(this.priceSelect == "По возрастанию"){
                 this.PRODUCTS.sort( (a,b) => a.price - b.price )
-            }  
-        }
+            } else if(this.priceSelect == "По убыванию"){
+                this.PRODUCTS.sort( (a,b) => b.price - a.price )
+            } else{
+                this.PRODUCTS.sort( (a,b) => a.name.localeCompare(b.name))
+            }
+        },
+        sortedByEstimation(){
+            if(this.rating_checkbox == true){
+                this.PRODUCTS.sort( (a,b) => b.product_rating - a.product_rating )
+            } else{
+                this.PRODUCTS.sort( (a,b) => a.name.localeCompare(b.name))
+            }
+        },
     },
     computed: {
         ...mapGetters([
