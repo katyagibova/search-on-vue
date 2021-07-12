@@ -18,7 +18,10 @@
                     cols="12"
                     sm="5"
                     >
+                        <p class="price_text">От:</p>
                         <v-text-field
+                        v-model="fromField"
+                        @click="snackbar = true"
                         label="От"
                         placeholder="От"
                         dense
@@ -29,7 +32,10 @@
                     cols="12"
                     sm="5"
                     >
+                        <p class="price_text">До:</p>
                         <v-text-field
+                        v-model="toField"
+                        @click="snackbar = true"
                         label="До"
                         placeholder="До"
                         dense
@@ -287,7 +293,7 @@
                 v-for="(col, c) in selectedColor"
                 :key="c"> -->
                 <div
-                v-if=" category == item.category && type == item.type &&  prof == item.professionalism && dim == item.dimension"> 
+                v-if=" category == item.category && type == item.type &&  prof == item.professionalism && dim == item.dimension && item.price >= selectedFromField && item.price <= selectedToField "> 
                     <v-card                   
                     elevation="1"
                     tile                    
@@ -392,6 +398,10 @@ export default {
         noCategory: false,
         dateSelect: "",
         priceSelect: "",
+        fromField: 0,
+        selectedFromField: 0,
+        toField: 0,
+        selectedToField: 0,
         rating_checkbox: false,
         snackbar: false,
         allCards: true,
@@ -413,7 +423,7 @@ export default {
             'GET_PRODUCTS'
         ]),
         toFind(){
-            if(this.type.length == 0 && this.professionalism.length == 0 && this.dimension.length == 0 && this.color.length == 0){
+            if(this.type.length == 0 && this.professionalism.length == 0 && this.dimension.length == 0 && this.color.length == 0 && this.fromField == 0 && this.toField == 0 ){
                 this.allCards = true
                 this.snackbar = false
             }else{
@@ -444,6 +454,21 @@ export default {
             } else{
                 this.selectedColor = this.color
             }
+
+            if(this.fromField != 0){
+                this.selectedFromField = this.fromField
+            } else{
+                this.selectedFromField = 0
+            }
+
+            if(this.toField != 0){
+                this.selectedToField = this.toField
+            } else{
+                this.selectedToField = 10000000
+            }
+
+            
+            
         },
         counterCategories(){
             if(this.category.trim() == ''){
@@ -544,5 +569,12 @@ export default {
 .col-10{
     margin-left: 15px;
     padding-top: 10px;
+}
+
+.price_text{
+    padding: 0;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin: 0;
 }
 </style>
