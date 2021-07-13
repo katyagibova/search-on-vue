@@ -177,11 +177,13 @@
           </v-select> 
         </v-row>
         <v-row v-if="watchCards">
-          <!-- v-for="(item, i) in PRODUCTS" -->
+         <div>
+                <!-- :key="i"
+ v-for="(item,i) in PRODUCTS" -->
           <v-card
             elevation="1"
             tile
-             v-for="(item,i) in PRODUCTS.slice(0,
+             v-for="(item, i) in paginatedData.slice(0,
              selectedItems.bar
              )"
             :key="i"
@@ -289,74 +291,9 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
-        </v-row>
-        <!-- <v-row
-                v-for="(item, i) in PRODUCTS"
-                :key="i"
-                >
-                <v-col
-                v-if="type == item.type">
-                    <v-card                
-                    elevation="1"
-                    tile                    
-                    color="rgb(240, 239, 239)"
-                    style="margin-bottom: 20px"
-                    v-if="filteredType">
-                    <v-list-item three-line>
-                        <v-list-item-avatar
-                        tile
-                        size="120"
-                        color="#fff"
-                        style="margin-right: 15px"
-                        ></v-list-item-avatar>
-                        <v-list-item-content>
-                        <div class="overline mb-3">
-                            {{item.date}}
-                        </div>
-                        <h2>
-                        {{item.name}}
-                        </h2>
-                        <v-row>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Год выпуска: {{item.year_of_production}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Тип товара: {{item.type}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Категория: {{item.category}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-spacer></v-spacer>
-                        </v-row>
-                        <v-row>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Размерность: {{item.dimension}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="4">
-                                <v-list-item-subtitle>Проффесиональность: {{item.professionalism}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Бренд: {{item.brand}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-spacer></v-spacer>
-                        </v-row>
-                        <v-row>
-                            <v-col cols="3">
-                                <v-list-item-subtitle>Рейтинг товара: {{item.product_rating}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-col cols="4">
-                                <v-list-item-subtitle>Рейтинг продавца: {{item.seller_rating}}</v-list-item-subtitle>
-                            </v-col>
-                            <v-spacer></v-spacer>
-                        </v-row>
-                        <h3> {{item.price}} РУБ</h3>
-                        </v-list-item-content>
-                    </v-list-item>
-                    </v-card>  
-                    </v-col>
-                </v-row>              ff -->
-
-            
+          </div>
+           <v-pagination v-model="pageNumber" :length="6" @input="nextPage"/>
+        </v-row>      
       </v-col>
     </v-row>
   </v-container>
@@ -370,17 +307,16 @@ export default {
   components: {},
   data() {
     return {
-    //   defaultSelected: {
-    //   text: '2 карточки',
-    //   value: {bar: 2 }
-    // },
       items: [
       { text: '2 карточки', value: {bar: 2 } },
       { text: '3 карточки', value: {bar: 3 } },
       { text: '4 карточки', value: {bar: 4 } }
     ],
-      selectedItems: {bar: 2 },
 
+      pageNumber: 1,
+      size: 10,
+
+      selectedItems: {bar: 2 },
       product_object: {}, 
       checkbox3: true,
       checkbox4: false,
@@ -408,6 +344,9 @@ export default {
        this.ADD_TO_FAVORITE(data)
         
     },
+    nextPage(page) {
+      this.pageNumber = page;
+    },
   },
    props: {
 
@@ -418,6 +357,16 @@ export default {
       return this.PRODUCTS.type.filter((elType) => {
         return elType.indexOf(this.type) !== -1;
       });
+    },
+    pageCount() {
+      let l = this.PRODUCTS.length,
+        s = this.size;
+      return Math.ceil(l / s) - 1;
+    },
+    paginatedData() {
+      const start = this.pageNumber * this.size - this.size,
+        end = start + this.size;
+      return this.PRODUCTS.slice(start, end);
     },
   },
   mounted() {
