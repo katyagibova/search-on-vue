@@ -52,7 +52,10 @@ export default new Vuex.Store({
       state.favorite.splice(index, 1)
     },
     INCREMENT: (state, index) => {
-      state.cart[index].quantity++
+      if(state.cart[index].quantity < 100){
+        state.cart[index].quantity++
+      }
+      
     },
     DECREMENT: (state, index) => {
       if(state.cart[index].quantity > 1){

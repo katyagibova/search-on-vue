@@ -9,11 +9,17 @@
 
         <p>Кол-во:</p>
         <span>
+
             <span style="cursor: pointer;" 
             @click="decrementItem">-</span>
-            {{cart_item_data.quantity}}
+
+            <input v-model ="cart_item_data.quantity" id = "inp" type="text" class="in" @click="toggle()" maxlength="2"/>
+            <!-- <span id = "spn" class="sp" contenteditable="true" @click="toggle()">{{cart_item_data.quantity}}</span> -->
+
             <span style="cursor: pointer;"
+            type="input"
             @click="incrementItem">+</span>
+
         </span>
         
         
@@ -36,12 +42,12 @@ export default {
     cart_item_data: {
       type: Object,
       default() {
-        return {};
+        return {
+        };
       },
     },
   },
   methods: {
-
       deleteFromCart(){
           this.$emit('deleteFromCart')
       },
@@ -51,9 +57,10 @@ export default {
       incrementItem() {
           this.$emit('increment')
       },
-  },
+    },
   data() {
-    return {};
+    return {
+    };
   },
   mounted() {
   },
@@ -63,4 +70,9 @@ export default {
 };
 </script>
 <style>
+.in{
+ text-align: center;
+   width:30px;
+}
+
 </style>
