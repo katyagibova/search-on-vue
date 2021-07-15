@@ -178,14 +178,10 @@
         </v-row>
         <v-row v-if="watchCards">
          <div>
-                <!-- :key="i"
- v-for="(item,i) in PRODUCTS" -->
           <v-card
             elevation="1"
             tile
-             v-for="(item, i) in paginatedData.slice(0,
-             selectedItems.bar
-             )"
+             v-for="(item, i) in paginatedData"
             :key="i"
             color="rgb(240, 239, 239)"
             style="margin-bottom: 20px"
@@ -292,7 +288,7 @@
             </v-list-item>
           </v-card>
           </div>
-           <v-pagination v-model="pageNumber" :length="6" @input="nextPage"/>
+           <v-pagination v-model="pageNumber" :length="pageCount + 1" @input="nextPage"/>
         </v-row>      
       </v-col>
     </v-row>
@@ -314,7 +310,6 @@ export default {
     ],
 
       pageNumber: 1,
-      size: 10,
 
       selectedItems: {bar: 2 },
       product_object: {}, 
@@ -360,12 +355,12 @@ export default {
     },
     pageCount() {
       let l = this.PRODUCTS.length,
-        s = this.size;
+        s = this.selectedItems.bar;
       return Math.ceil(l / s) - 1;
     },
     paginatedData() {
-      const start = this.pageNumber * this.size - this.size,
-        end = start + this.size;
+      const start = this.pageNumber * this.selectedItems.bar - this.selectedItems.bar,
+        end = start + this.selectedItems.bar;
       return this.PRODUCTS.slice(start, end);
     },
   },
