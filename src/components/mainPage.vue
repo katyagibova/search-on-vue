@@ -402,8 +402,11 @@ export default {
         dateItems: ["По умолчанию", "По возрастанию", "По убыванию"],
         priceItems: ["По умолчанию", "По возрастанию", "По убыванию"],
         newProf: [],
+        selectProf: [],
         newTy: [],
+        selectTy: [],
         newDim: [],
+        selectDim: [],
       }
     },
     methods:{
@@ -412,32 +415,72 @@ export default {
             'GET_PRODUCTS'
         ]),
         toFind(){
-            if(this.type.length == 0 && this.professionalism.length == 0 && this.dimension.length == 0 && this.color.length == 0 && this.fromField == 0 && this.toField == 0 ){
+            if(this.type.length == 0 && this.professionalism.length == 0 && this.dimension.length == 0  && this.fromField == 0 && this.toField == 0 ){
                 this.allCards = true
                 this.selectedCards = false
                 this.snackbar = false
+                this.newType()
+                this.newDimension()
             }else{
                 this.allCards = false
                 this.selectedCards = true
                 this.snackbar = true
             }
             
-            if(this.type.length == 0){
+            if(this.type == []){
                 this.selectedType = this.SKATES.type
+                // this.newProfessionalism()
+                // this.newDimension()
             } else{
                 this.selectedType = this.type
+                this.selectProf = []
+                this.selectDim = []
+                for( let i = 0;  i< 15; i++){
+                    if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].type == this.type ){                       
+                        this.selectProf = this.selectProf.concat(this.PRODUCTS[i].professionalism)
+                        this.newProf = this.selectProf.filter((v, i, a) => a.indexOf(v) === i)
+
+                        this.selectDim = this.selectDim.concat(this.PRODUCTS[i].dimension)
+                        this.newDim = this.selectDim.filter((v, i, a) => a.indexOf(v) === i)
+                    }
+                }
             }
             
             if(this.professionalism.length == 0){
                 this.selectedProfessionalism = this.SKATES.professionalism
+                
             } else{
                 this.selectedProfessionalism = this.professionalism
+                this.selectTy = []
+                this.selectDim = []
+                for( let i = 0;  i< 15; i++){
+                    if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].professionalism == this.professionalism ){                       
+                        this.selectTy = this.selectTy.concat(this.PRODUCTS[i].type)
+                        this.newTy = this.selectTy.filter((v, i, a) => a.indexOf(v) === i)
+
+                        this.selectDim = this.selectDim.concat(this.PRODUCTS[i].dimension)
+                        this.newDim = this.selectDim.filter((v, i, a) => a.indexOf(v) === i)
+                    }
+                }
             }
             
             if(this.dimension.length == 0){
                 this.selectedDimension = this.SKATES.dimension
+                // this.newType()
+                // this.newProfessionalism()  
             } else{
                 this.selectedDimension = this.dimension
+                this.selectTy = []
+                this.selectProf = []
+                for( let i = 0;  i< 15; i++){
+                    if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].dimension == this.dimension ){                       
+                        this.selectTy = this.selectTy.concat(this.PRODUCTS[i].type)
+                        this.newTy = this.selectTy.filter((v, i, a) => a.indexOf(v) === i)
+
+                        this.selectProf = this.selectProf.concat(this.PRODUCTS[i].professionalism)
+                        this.newProf = this.selectProf.filter((v, i, a) => a.indexOf(v) === i)
+                    }
+                }
             }
 
             if(this.color.length == 0){
@@ -456,10 +499,7 @@ export default {
                 this.selectedToField = this.toField
             } else{
                 this.selectedToField = 10000000
-            }
-
-            
-            
+            }            
         },
         counterCategories(){
             if(this.category.trim() == ''){
@@ -499,9 +539,6 @@ export default {
             } else{
                 this.PRODUCTS.sort( (a,b) => a.name.localeCompare(b.name))
             }
-        },
-        onlyUnique(value, index, self) { 
-            return self.indexOf(value) === index;
         },
         newType(){
             if(this.category.trim() == ''){
