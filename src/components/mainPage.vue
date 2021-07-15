@@ -53,7 +53,7 @@
                     <v-row>
                         <v-col cols="10">
                             <v-checkbox
-                            v-for="(item, i) in SKATES.type"
+                            v-for="(item, i) in newTy"
                             :key="i"
                             @click="snackbar = true"
                             v-model="type"
@@ -61,12 +61,6 @@
                             :value="`${item}`" 
                             :label="`${item}`"
                             hide-details></v-checkbox> 
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col cols="11">
-                            <p>{{type}}</p>
                         </v-col>
                     </v-row>
                     
@@ -80,7 +74,7 @@
                     <v-row>
                         <v-col cols="10">
                             <v-checkbox
-                            v-for="(item, i) in SKATES.professionalism"
+                            v-for="(item, i) in newProf"
                             :key="i"
                             @click="snackbar = true"
                             v-model="professionalism"
@@ -93,19 +87,13 @@
                     <v-row>
                         <v-spacer></v-spacer>
                         <v-col cols="11">
-                            <p>{{professionalism}}</p>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col cols="11">
                             <h3 >Размерность</h3>
                         </v-col>
                     </v-row>
                     <v-row>
                         <v-col cols="10">
                             <v-checkbox
-                            v-for="(item, i) in SKATES.dimension"
+                            v-for="(item, i) in newDim"
                             :key="i"
                             @click="snackbar = true"
                             v-model="dimension"
@@ -114,12 +102,6 @@
                             :label="`${item}`"
                             hide-details></v-checkbox>
                         </v-col>                    
-                    </v-row>
-                    <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col cols="11">
-                            <p>{{dimension}}</p>
-                        </v-col>
                     </v-row>
                     <v-row>
                         <v-spacer></v-spacer>
@@ -206,7 +188,7 @@
                 <div
                 v-else>
                     <v-row
-                    v-if="allCards && noCategory == false">
+                    v-if="allCards == true && noCategory == false">
                         <div
                         v-for="(item, i) in PRODUCTS"
                         :key="i">
@@ -276,6 +258,8 @@
                 <div v-if="noCategory">
                     <h2>К сожалению товаров из этой категории нет</h2>
                 </div>
+                <div
+                v-if="selectedCards == true">
                 <v-row
                 v-for="(item, i) in PRODUCTS"
                 :key="i"
@@ -357,6 +341,7 @@
                     </div>
                     <!-- </div>  -->
                 </v-row>
+                </div>
             </v-col>
         </v-row>
         <v-snackbar
@@ -405,6 +390,7 @@ export default {
         rating_checkbox: false,
         snackbar: false,
         allCards: true,
+        selectedCards: false,
         type: [],
         selectedType: [],
         professionalism: [],
@@ -414,7 +400,10 @@ export default {
         color: [],
         selectedColor: [],
         dateItems: ["По умолчанию", "По возрастанию", "По убыванию"],
-        priceItems: ["По умолчанию", "По возрастанию", "По убыванию"]
+        priceItems: ["По умолчанию", "По возрастанию", "По убыванию"],
+        newProf: [],
+        newTy: [],
+        newDim: [],
       }
     },
     methods:{
@@ -425,9 +414,11 @@ export default {
         toFind(){
             if(this.type.length == 0 && this.professionalism.length == 0 && this.dimension.length == 0 && this.color.length == 0 && this.fromField == 0 && this.toField == 0 ){
                 this.allCards = true
+                this.selectedCards = false
                 this.snackbar = false
             }else{
                 this.allCards = false
+                this.selectedCards = true
                 this.snackbar = true
             }
             
@@ -509,6 +500,48 @@ export default {
                 this.PRODUCTS.sort( (a,b) => a.name.localeCompare(b.name))
             }
         },
+        onlyUnique(value, index, self) { 
+            return self.indexOf(value) === index;
+        },
+        newType(){
+            if(this.category.trim() == ''){
+                this.noCategory = false
+            } else{
+                for( let i = 0;  i< 15; i++){
+                    if( this.PRODUCTS[i].category == this.category){
+                        this.newTy = this.newTy.concat(this.PRODUCTS[i].type)
+                        this.newTy = this.newTy.filter((v, i, a) => a.indexOf(v) === i)
+                    }
+                }
+            }
+
+        },
+        newProfessionalism(){
+            if(this.category.trim() == ''){
+                this.noCategory = false
+            } else{
+                for( let i = 0;  i< 15; i++){
+                    if( this.PRODUCTS[i].category == this.category){
+                        this.newProf = this.newProf.concat(this.PRODUCTS[i].professionalism)
+                        this.newProf = this.newProf.filter((v, i, a) => a.indexOf(v) === i)
+                    }
+                }
+            }
+
+        },
+        newDimension(){
+            if(this.category.trim() == ''){
+                this.noCategory = false
+            } else{
+                for( let i = 0;  i< 15; i++){
+                    if( this.PRODUCTS[i].category == this.category){
+                        this.newDim = this.newDim.concat(this.PRODUCTS[i].dimension)
+                        this.newDim = this.newDim.filter((v, i, a) => a.indexOf(v) === i)
+                    }
+                }
+            }
+
+        },
     },
     computed: {
         ...mapGetters([
@@ -541,6 +574,9 @@ export default {
       this.GET_SKATES();
       this.GET_PRODUCTS();
       this.counterCategories();
+      this.newProfessionalism();
+      this.newType();
+      this.newDimension();
     },
 }
 </script>
