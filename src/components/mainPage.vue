@@ -24,6 +24,7 @@
             <v-col cols="12" sm="5">
               <v-text-field
                 label="От"
+                :rules="inputPrice"
                 placeholder="От"
                 dense
                 solo
@@ -32,12 +33,39 @@
             <v-col cols="12" sm="5">
               <v-text-field
                 label="До"
+                :rules="inputPrice"
                 placeholder="До"
                 dense
                 solo
               ></v-text-field>
             </v-col>
+
             <v-spacer></v-spacer>
+            <v-col cols="11">
+              <h3>Дата</h3>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-spacer></v-spacer>
+            <v-col cols="12" sm="5">
+              <v-text-field
+                label="От"
+                :rules="inputDate"
+                placeholder="От"
+                dense
+                solo
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="5">
+              <v-text-field
+                label="До"
+                :rules="inputDate"
+                placeholder="До"
+                dense
+                solo
+              ></v-text-field>
+            </v-col>
+<v-spacer></v-spacer>
           </v-row>
           <v-row>
             <v-spacer></v-spacer>
@@ -140,6 +168,7 @@
         <v-row style="margin-top: 15px">
           <v-text-field
             label="Поиск"
+            :rules="inputSearch"
             placeholder="Поиск"
             dense
             solo
@@ -303,6 +332,28 @@ export default {
   components: {},
   data() {
     return {
+      inputDate: [
+        v => !!v || 'Заполните поле',
+        v => (v || '').length <= 4 || '4 символа максимум',
+        v => {
+          const pattern = /(19|20)\d\d$/
+          return pattern.test(v) || 'Неправильный формат'
+        },
+      ],
+      inputPrice: [
+        v => !!v || 'Заполните поле',
+        v => {
+          const pattern = /^[0-9]*$/
+          return pattern.test(v) || 'Неправильный формат'
+        },
+      ],
+      inputSearch: [
+        v => !!v || 'Заполните поле',
+        v => {
+          const pattern = /^[а-яА-Яa-zA-Z0-9]*$/
+          return pattern.test(v) || 'Неправильный формат'
+        },
+      ],
       items: [
       { text: '2 карточки', value: {bar: 2 } },
       { text: '3 карточки', value: {bar: 3 } },
