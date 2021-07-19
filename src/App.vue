@@ -15,7 +15,11 @@
       <v-col cols="2">
         <v-btn
         :to="`/`">Поиск</v-btn>
-        </v-col>
+      </v-col>
+      <v-col cols="3">
+        <v-btn
+        :to="`/vMap`">Карта</v-btn>
+      </v-col>
       <v-spacer></v-spacer>
     </v-row>
     

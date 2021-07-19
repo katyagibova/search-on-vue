@@ -5,6 +5,7 @@ import Page2 from '../components/Comp.vue'
 import mainPage from '../components/mainPage.vue'
 import vCarte from '../components/v-carte.vue'
 import favorites from '../components/favorites.vue'
+import vMap from '../components/v-map.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,6 +35,11 @@ const routes = [
     name: 'favorites',
     component: favorites,
     props: true
+  }, 
+  {
+    path: '/vMap',
+    name: 'vMap',
+    component: vMap
   },
 ]
 
