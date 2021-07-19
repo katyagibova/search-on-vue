@@ -407,6 +407,7 @@ export default {
         selectTy: [],
         newDim: [],
         selectDim: [],
+        exx: [],
       }
     },
     methods:{
@@ -576,6 +577,22 @@ export default {
             }
 
         },
+        maximumPrice(){
+            if(this.category.trim() == ''){
+                this.noCategory = false
+            } else{
+                for( let i = 0;  i< this.PRODUCTS.length; i++){
+                    if( this.PRODUCTS[i].category == this.category){
+                        this.exx = this.exx.concat(this.PRODUCTS[i].price)
+                        console.log(this.exx)
+                        this.toField = this.exx
+                        console.log(this.toField)
+                        return this.toField
+                    }
+                }
+            }            
+        }
+                    
     },
     computed: {
         ...mapGetters([
@@ -603,6 +620,7 @@ export default {
             }) 
         },
         
+        
     },
     mounted(){
       this.GET_SKATES();
@@ -611,6 +629,7 @@ export default {
       this.newProfessionalism();
       this.newType();
       this.newDimension();
+      this.maximumPrice();
     },
 }
 </script>
