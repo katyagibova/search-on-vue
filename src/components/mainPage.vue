@@ -419,68 +419,65 @@ export default {
                 this.allCards = true
                 this.selectedCards = false
                 this.snackbar = false
-                this.newType()
-                this.newDimension()
+                // this.newType()
+                // this.newDimension()
+                // this.newProfessionalism()
             }else{
                 this.allCards = false
                 this.selectedCards = true
                 this.snackbar = true
             }
             
-            if(this.type == []){
+            if(this.type.length == 0){
                 this.selectedType = this.SKATES.type
-                // this.newProfessionalism()
-                // this.newDimension()
             } else{
                 this.selectedType = this.type
-                this.selectProf = []
-                this.selectDim = []
-                for( let i = 0;  i< 15; i++){
-                    if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].type == this.type ){                       
-                        this.selectProf = this.selectProf.concat(this.PRODUCTS[i].professionalism)
-                        this.newProf = this.selectProf.filter((v, i, a) => a.indexOf(v) === i)
+                // this.selectProf = []
+                // this.selectDim = []
+                // for( let i = 0;  i < 15; i++){
+                //     if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].type == this.type ){                       
+                //         this.selectProf = this.selectProf.concat(this.PRODUCTS[i].professionalism)
+                //         this.newProf = this.selectProf.filter((v, i, a) => a.indexOf(v) === i)
 
-                        this.selectDim = this.selectDim.concat(this.PRODUCTS[i].dimension)
-                        this.newDim = this.selectDim.filter((v, i, a) => a.indexOf(v) === i)
-                    }
-                }
+                //         this.selectDim = this.selectDim.concat(this.PRODUCTS[i].dimension)
+                //         this.newDim = this.selectDim.filter((v, i, a) => a.indexOf(v) === i)
+                //     }
+                // }
+                // console.log(this.type.value)
             }
             
             if(this.professionalism.length == 0){
                 this.selectedProfessionalism = this.SKATES.professionalism
-                
             } else{
                 this.selectedProfessionalism = this.professionalism
-                this.selectTy = []
-                this.selectDim = []
-                for( let i = 0;  i< 15; i++){
-                    if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].professionalism == this.professionalism ){                       
-                        this.selectTy = this.selectTy.concat(this.PRODUCTS[i].type)
-                        this.newTy = this.selectTy.filter((v, i, a) => a.indexOf(v) === i)
+                // this.selectTy = []
+                // this.selectDim = []
+                // for( let i = 0;  i< 15; i++){
+                //     if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].professionalism == this.professionalism ){                       
+                //         this.selectTy = this.selectTy.concat(this.PRODUCTS[i].type)
+                //         this.newTy = this.selectTy.filter((v, i, a) => a.indexOf(v) === i)
 
-                        this.selectDim = this.selectDim.concat(this.PRODUCTS[i].dimension)
-                        this.newDim = this.selectDim.filter((v, i, a) => a.indexOf(v) === i)
-                    }
-                }
+                //         this.selectDim = this.selectDim.concat(this.PRODUCTS[i].dimension)
+                //         this.newDim = this.selectDim.filter((v, i, a) => a.indexOf(v) === i)
+                //     }
+                // }
             }
             
             if(this.dimension.length == 0){
                 this.selectedDimension = this.SKATES.dimension
-                // this.newType()
-                // this.newProfessionalism()  
             } else{
                 this.selectedDimension = this.dimension
-                this.selectTy = []
-                this.selectProf = []
-                for( let i = 0;  i< 15; i++){
-                    if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].dimension == this.dimension ){                       
-                        this.selectTy = this.selectTy.concat(this.PRODUCTS[i].type)
-                        this.newTy = this.selectTy.filter((v, i, a) => a.indexOf(v) === i)
+                // this.selectTy = []
+                // this.selectProf = []
+                // for( let i = 0;  i< 15; i++){
+                //     if( this.PRODUCTS[i].category == this.category && this.PRODUCTS[i].dimension == this.dimension ){                       
+                //         this.selectTy = this.selectTy.concat(this.PRODUCTS[i].type)
+                //         this.newTy = this.selectTy.filter((v, i, a) => a.indexOf(v) === i)
 
-                        this.selectProf = this.selectProf.concat(this.PRODUCTS[i].professionalism)
-                        this.newProf = this.selectProf.filter((v, i, a) => a.indexOf(v) === i)
-                    }
-                }
+                //         this.selectProf = this.selectProf.concat(this.PRODUCTS[i].professionalism)
+                //         this.newProf = this.selectProf.filter((v, i, a) => a.indexOf(v) === i)
+                //     }
+                // }
             }
 
             if(this.color.length == 0){
@@ -544,7 +541,7 @@ export default {
             if(this.category.trim() == ''){
                 this.noCategory = false
             } else{
-                for( let i = 0;  i< 15; i++){
+                for( let i = 0;  i< this.PRODUCTS.length; i++){
                     if( this.PRODUCTS[i].category == this.category){
                         this.newTy = this.newTy.concat(this.PRODUCTS[i].type)
                         this.newTy = this.newTy.filter((v, i, a) => a.indexOf(v) === i)
@@ -557,7 +554,7 @@ export default {
             if(this.category.trim() == ''){
                 this.noCategory = false
             } else{
-                for( let i = 0;  i< 15; i++){
+                for( let i = 0;  i < this.PRODUCTS.length; i++){
                     if( this.PRODUCTS[i].category == this.category){
                         this.newProf = this.newProf.concat(this.PRODUCTS[i].professionalism)
                         this.newProf = this.newProf.filter((v, i, a) => a.indexOf(v) === i)
@@ -570,7 +567,7 @@ export default {
             if(this.category.trim() == ''){
                 this.noCategory = false
             } else{
-                for( let i = 0;  i< 15; i++){
+                for( let i = 0;  i< this.PRODUCTS.length; i++){
                     if( this.PRODUCTS[i].category == this.category){
                         this.newDim = this.newDim.concat(this.PRODUCTS[i].dimension)
                         this.newDim = this.newDim.filter((v, i, a) => a.indexOf(v) === i)

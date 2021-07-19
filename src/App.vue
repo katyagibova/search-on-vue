@@ -7,7 +7,7 @@
         <v-col cols="2">
           <v-btn
           color="#625AD8"
-          style="color: #fff"
+          style="color: #fff; width: 100%"
           :to="`/page2`">Фильтрация</v-btn>
         </v-col>
         <!-- <v-col cols="2">
@@ -19,13 +19,13 @@
         <v-col cols="2">
           <v-btn
           color="#625AD8"
-          style="color: #fff"
+          style="color: #fff; width: 100%"
           :to="`/`">Поиск</v-btn>
           </v-col>
         <v-col cols="2">
           <v-btn
           color="#625AD8"
-          style="color: #fff"
+          style="color: #fff; width: 100%"
           :to="`/filterspage`">Категории</v-btn>
         </v-col>
         <v-spacer></v-spacer>
