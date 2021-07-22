@@ -1,34 +1,26 @@
 <template>
   <div>
-    <!-- Карта-при клике появляется метка {{ cords }} -->
     <div id="map"></div>
   </div>
 </template>
 <script>
 import { loadYmap } from "vue-yandex-maps";
+
 export default {
   components: {},
   name: "v-map",
   props: {},
   async mounted() {
-    const settings = { lang: "ru_RU" };
-    await loadYmap(settings);
-  
-    // let geolocation = ymaps.geolocation, myPlacemark,
     
-    //   myMap = new ymaps.Map(
-    //     "map",
-    //     {
-    //       center: this.cords,
-    //       zoom: 10,
-    //       controls: ["geolocationControl"],
-    //     },
-    //     {
-    //       searchControlProvider: "yandex#search",
-    //     }
-    //   );
-    var myPlacemark, // eslint-disable-next-line
-        myMap = new ymaps.Map('map', {
+    const settings = {
+  apiKey: 'd1547931-4c0e-4766-8df1-36bd990919b7',
+  lang: "ru_RU",
+  coordorder: 'latlong',
+  version: "2.1"
+};
+    await loadYmap(settings);
+    // eslint-disable-next-line
+    let myPlacemark,myMap = new ymaps.Map('map', {
             center: this.cords,
             zoom: 9,
             controls: ["geolocationControl"],
@@ -47,13 +39,12 @@ export default {
         }
         // Если нет – создаем.
         else {
-          myPlacemark = createPlacemark(coords);
-          myMap.geoObjects.add(myPlacemark);
+         myPlacemark = createPlacemark(coords);
+         myMap.geoObjects.add(myPlacemark);
         }
         //мой метод
-        this.getAddress(coords);
-      },
-      this
+        this.getAddress(coords,myPlacemark);
+      },this
     );
 
     // Создание метки.
@@ -72,13 +63,13 @@ export default {
     }
   },
   methods: {
-    getAddress(coords) {
-         // eslint-disable-next-line
-      this.myPlacemark.properties.set('iconCaption', 'поиск...');
-       // eslint-disable-next-line
+    getAddress(coords,myPlacemark) {
+      // eslint-disable-next-line
+        myPlacemark.properties.set('iconCaption', 'поиск...');
+        // eslint-disable-next-line
         ymaps.geocode(coords).then(function (res) {
             var firstGeoObject = res.geoObjects.get(0);
-             // eslint-disable-next-line
+            // eslint-disable-next-line
             myPlacemark.properties
                 .set({
                     // Формируем строку с данными об объекте.
@@ -97,6 +88,8 @@ export default {
   data() {
     return {
       cords: [55.72, 37.65],
+      myPlacemark: {},
+      myMap: {},
     };
   },
 };
