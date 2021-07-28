@@ -42,8 +42,11 @@ export default {
          myPlacemark = createPlacemark(coords);
          myMap.geoObjects.add(myPlacemark);
         }
-        //мой метод
+       
+        
+        this.getcoords(coords);
         this.getAddress(coords,myPlacemark);
+        console.log(this.cords);
       },this
     );
 
@@ -63,6 +66,9 @@ export default {
     }
   },
   methods: {
+    getcoords(coords){
+      this.cords = coords;
+    },
     getAddress(coords,myPlacemark) {
       // eslint-disable-next-line
         myPlacemark.properties.set('iconCaption', 'поиск...');
@@ -70,7 +76,7 @@ export default {
         ymaps.geocode(coords).then(function (res) {
             var firstGeoObject = res.geoObjects.get(0);
             // eslint-disable-next-line
-            myPlacemark.properties
+          this.adress = (myPlacemark.properties
                 .set({
                     // Формируем строку с данными об объекте.
                     iconCaption: [
@@ -80,9 +86,11 @@ export default {
                         firstGeoObject.getThoroughfare() || firstGeoObject.getPremise()
                     ].filter(Boolean).join(', '),
                     // В качестве контента балуна задаем строку с адресом объекта.
-                    balloonContent: firstGeoObject.getAddressLine()
-                });
+                      balloonContent: firstGeoObject.getAddressLine(),
+                      
+                }));
         });
+       console.log(this.adress)
     },
   },
   data() {
@@ -90,6 +98,7 @@ export default {
       cords: [55.72, 37.65],
       myPlacemark: {},
       myMap: {},
+      adress: {},
     };
   },
 };
